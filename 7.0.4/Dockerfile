@@ -19,10 +19,8 @@ RUN usermod -u 1000 apache
 RUN cp /usr/bin/php84 /usr/bin/php
 # Install composer for openemr package building
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+COPY openemr
 
-RUN apk add --no-cache git build-base \
-    && git clone https://github.com/openemr/openemr.git --depth 1 \
-    && rm -rf openemr/.git \
     && cd openemr \
     && composer install --no-dev \
     && npm install --unsafe-perm \
